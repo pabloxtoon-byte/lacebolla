@@ -46,10 +46,10 @@ func _generate_walls() -> void:
 	for y in range(size.y):
 		_add_wall_tile(Vector2(-tile_size, y * tile_size), wall_tex)
 		_add_wall_tile(Vector2(room_width, y * tile_size), wall_tex)
-	_create_door("up", Vector2(room_width / 2, -tile_size / 2))
-	_create_door("down", Vector2(room_width / 2, room_height + tile_size / 2))
-	_create_door("left", Vector2(-tile_size / 2, room_height / 2))
-	_create_door("right", Vector2(room_width + tile_size / 2, room_height / 2))
+	_create_door("up", Vector2(room_width * 0.5, -tile_size * 0.5))
+	_create_door("down", Vector2(room_width * 0.5, room_height + tile_size * 0.5))
+	_create_door("left", Vector2(-tile_size * 0.5, room_height * 0.5))
+	_create_door("right", Vector2(room_width + tile_size * 0.5, room_height * 0.5))
 
 func _add_wall_tile(pos: Vector2, tex: Texture2D) -> void:
 	var tile := Sprite2D.new()
@@ -91,7 +91,7 @@ func _spawn_obstacles() -> void:
 
 func spawn_enemies(enemy_scenes: Array, player: Node2D) -> void:
 	for scene in enemy_scenes:
-		var enemy := scene.instantiate()
+		var enemy: Node2D = scene.instantiate()
 		add_child(enemy)
 		enemy.global_position = global_position + Vector2(randi_range(2, size.x - 2) * tile_size, randi_range(2, size.y - 2) * tile_size)
 		enemy.set_target(player)
