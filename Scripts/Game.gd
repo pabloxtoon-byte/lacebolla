@@ -31,7 +31,7 @@ func _ready() -> void:
 	pause_menu.visible = false
 	pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player:
 		camera.global_position = player.global_position
 	ui.update_stats()
@@ -73,7 +73,7 @@ func _spawn_player() -> void:
 	var start_coord := Vector2i.ZERO
 	player = player_scene.instantiate()
 	world.add_child(player)
-	var start_room := rooms[start_coord]
+	var start_room: Node2D = rooms[start_coord]
 	player.global_position = start_room.global_position + Vector2(room_size.x * 8, room_size.y * 8)
 	player.died.connect(_on_player_died)
 	player.health_changed.connect(ui.update_health)
@@ -137,11 +137,11 @@ func _on_quit_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
 
 func _random_walk_rooms(count: int) -> Array:
-	var coords: Array = [Vector2i.ZERO]
+	var coords: Array[Vector2i] = [Vector2i.ZERO]
 	while coords.size() < count:
-		var current := coords.pick_random()
-		var dir := [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)].pick_random()
-		var next := current + dir
+		var current: Vector2i = coords.pick_random()
+		var dir: Vector2i = [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)].pick_random()
+		var next: Vector2i = current + dir
 		if not coords.has(next):
 			coords.append(next)
 	return coords
