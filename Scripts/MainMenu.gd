@@ -41,14 +41,14 @@ func _add_hills(img: Image) -> void:
 			img.set_pixel(x, y, Color(0.1, 0.1, 0.14))
 
 func _add_vignette(img: Image) -> void:
-	var w := img.get_width()
-	var h := img.get_height()
-	var center := Vector2(w / 2.0, h / 2.0)
+	var w: int = img.get_width()
+	var h: int = img.get_height()
+	var center: Vector2 = Vector2(w / 2.0, h / 2.0)
 	for y in range(h):
 		for x in range(w):
-			var dist := center.distance_to(Vector2(x, y))
-			var alpha := clamp((dist / (min(w, h) * 0.6)), 0.0, 0.6)
-			var c := img.get_pixel(x, y)
+			var dist: float = center.distance_to(Vector2(x, y))
+			var alpha: float = clamp((dist / (float(min(w, h)) * 0.6)), 0.0, 0.6)
+			var c: Color = img.get_pixel(x, y)
 			img.set_pixel(x, y, c.darkened(alpha))
 
 func _on_start_pressed() -> void:
