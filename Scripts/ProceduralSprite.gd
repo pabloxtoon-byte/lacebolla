@@ -7,15 +7,15 @@ static func _fill_rect(img: Image, rect: Rect2i, color: Color) -> void:
 			img.set_pixel(x, y, color)
 
 static func _outline(img: Image, color: Color) -> void:
-	var w := img.get_width()
-	var h := img.get_height()
+	var w: int = img.get_width()
+	var h: int = img.get_height()
 	for y in range(h):
 		for x in range(w):
-			var c := img.get_pixel(x, y)
+			var c: Color = img.get_pixel(x, y)
 			if c.a > 0.0:
 				for dir in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
-					var nx := x + dir.x
-					var ny := y + dir.y
+					var nx: int = x + dir.x
+					var ny: int = y + dir.y
 					if nx >= 0 and nx < w and ny >= 0 and ny < h and img.get_pixel(nx, ny).a <= 0.0:
 						img.set_pixel(nx, ny, color)
 
@@ -81,10 +81,10 @@ static func make_shadow_texture() -> Texture2D:
 	img.fill(Color(0, 0, 0, 0))
 	for y in range(32):
 		for x in range(32):
-			var dx := x - 16
-			var dy := y - 16
-			var dist := sqrt(dx * dx + dy * dy)
-			var alpha := clamp(1.0 - dist / 16.0, 0.0, 1.0)
+			var dx: float = x - 16
+			var dy: float = y - 16
+			var dist: float = sqrt(dx * dx + dy * dy)
+			var alpha: float = clamp(1.0 - dist / 16.0, 0.0, 1.0)
 			img.set_pixel(x, y, Color(0, 0, 0, alpha * 0.35))
 	return ImageTexture.create_from_image(img)
 
@@ -93,9 +93,9 @@ static func make_light_texture() -> Texture2D:
 	img.fill(Color(0, 0, 0, 0))
 	for y in range(64):
 		for x in range(64):
-			var dx := x - 32
-			var dy := y - 32
-			var dist := sqrt(dx * dx + dy * dy)
-			var alpha := clamp(1.0 - dist / 32.0, 0.0, 1.0)
+			var dx: float = x - 32
+			var dy: float = y - 32
+			var dist: float = sqrt(dx * dx + dy * dy)
+			var alpha: float = clamp(1.0 - dist / 32.0, 0.0, 1.0)
 			img.set_pixel(x, y, Color(1, 1, 1, alpha))
 	return ImageTexture.create_from_image(img)
