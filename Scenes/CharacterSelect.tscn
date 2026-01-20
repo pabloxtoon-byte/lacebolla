@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/CharacterSelect.gd" id="1"]
+
+[node name="CharacterSelect" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="Center"]
+custom_minimum_size = Vector2(420, 280)
+
+[node name="Title" type="Label" parent="Center/VBox"]
+text = "Elige tu héroe"
+horizontal_alignment = 1
+
+[node name="ButtonRow" type="HBoxContainer" parent="Center/VBox"]
+
+[node name="WarriorButton" type="Button" parent="Center/VBox/ButtonRow"]
+text = "Guerrero"
+
+[node name="MageButton" type="Button" parent="Center/VBox/ButtonRow"]
+text = "Mago"
+
+[node name="RogueButton" type="Button" parent="Center/VBox/ButtonRow"]
+text = "Pícaro"
+
+[node name="DescLabel" type="Label" parent="Center/VBox"]
+unique_name_in_owner = true
+text = ""
+
+[connection signal="pressed" from="Center/VBox/ButtonRow/WarriorButton" to="." method="_on_warrior_pressed"]
+[connection signal="pressed" from="Center/VBox/ButtonRow/MageButton" to="." method="_on_mage_pressed"]
+[connection signal="pressed" from="Center/VBox/ButtonRow/RogueButton" to="." method="_on_rogue_pressed"]
+[connection signal="mouse_entered" from="Center/VBox/ButtonRow/WarriorButton" to="." method="_on_warrior_mouse_entered"]
+[connection signal="mouse_entered" from="Center/VBox/ButtonRow/MageButton" to="." method="_on_mage_mouse_entered"]
+[connection signal="mouse_entered" from="Center/VBox/ButtonRow/RogueButton" to="." method="_on_rogue_mouse_entered"]

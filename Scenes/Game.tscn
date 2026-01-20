@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Game.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/Room.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://Scenes/Player.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Scenes/EnemySlime.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://Scenes/EnemyRat.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://Scenes/EnemyBat.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://Scenes/Coin.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://Scenes/Key.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Scenes/Chest.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Scenes/UI.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://Scenes/RewardSelect.tscn" id="11"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1")
+room_scene = ExtResource("2")
+player_scene = ExtResource("3")
+enemy_scenes = Array[PackedScene]([ExtResource("4"), ExtResource("5"), ExtResource("6")])
+coin_scene = ExtResource("7")
+key_scene = ExtResource("8")
+chest_scene = ExtResource("9")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="UI" parent="." instance=ExtResource("10")]
+
+[node name="RewardSelect" parent="." instance=ExtResource("11")]
+
+[node name="PauseMenu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+
+[node name="Center" type="CenterContainer" parent="PauseMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="PauseMenu/Center"]
+custom_minimum_size = Vector2(260, 160)
+
+[node name="Title" type="Label" parent="PauseMenu/Center/VBox"]
+text = "Pausa"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/Center/VBox"]
+text = "Continuar"
+
+[node name="QuitButton" type="Button" parent="PauseMenu/Center/VBox"]
+text = "Salir al menú"
+
+[connection signal="pressed" from="PauseMenu/Center/VBox/ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/Center/VBox/QuitButton" to="." method="_on_quit_pressed"]
