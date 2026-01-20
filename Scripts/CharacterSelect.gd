@@ -6,7 +6,7 @@ func _ready() -> void:
 	_update_desc(GameState.CLASS_WARRIOR)
 
 func _update_desc(class_id: String) -> void:
-	var stats := GameState.BASE_STATS[class_id]
+	var stats: Dictionary = GameState.BASE_STATS[class_id]
 	match class_id:
 		GameState.CLASS_WARRIOR:
 			desc_label.text = "Guerrero: vida alta, espada melee.\nVida: %d  Daño: %d" % [stats["max_hp"], stats["damage"]]
