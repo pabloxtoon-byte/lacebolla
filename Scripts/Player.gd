@@ -95,7 +95,7 @@ func try_attack() -> void:
 		swing_melee()
 
 func shoot_projectile() -> void:
-	var projectile := projectile_scene.instantiate()
+	var projectile: Area2D = projectile_scene.instantiate()
 	get_parent().add_child(projectile)
 	projectile.global_position = global_position + facing * 12.0
 	projectile.velocity = facing * projectile.speed

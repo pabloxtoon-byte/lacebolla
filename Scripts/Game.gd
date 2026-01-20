@@ -47,12 +47,12 @@ func _toggle_pause() -> void:
 func _generate_dungeon() -> void:
 	rooms.clear()
 	_clear_children(world)
-	var coords := _random_walk_rooms(8)
-	var coord_set := {}
+	var coords: Array[Vector2i] = _random_walk_rooms(8)
+	var coord_set: Dictionary = {}
 	for c in coords:
 		coord_set[c] = true
 	for coord in coords:
-		var neighbors := {}
+		var neighbors: Dictionary = {}
 		if coord_set.has(coord + Vector2i(0, -1)):
 			neighbors["up"] = coord + Vector2i(0, -1)
 		if coord_set.has(coord + Vector2i(0, 1)):
@@ -61,7 +61,7 @@ func _generate_dungeon() -> void:
 			neighbors["left"] = coord + Vector2i(-1, 0)
 		if coord_set.has(coord + Vector2i(1, 0)):
 			neighbors["right"] = coord + Vector2i(1, 0)
-		var room := room_scene.instantiate()
+		var room: Node2D = room_scene.instantiate()
 		world.add_child(room)
 		room.position = Vector2(coord.x * room_spacing.x, coord.y * room_spacing.y)
 		room.setup(coord, neighbors)
@@ -104,15 +104,15 @@ func _on_room_cleared(room: Node) -> void:
 
 func _spawn_loot(room: Node) -> void:
 	for i in range(randi_range(2, 5)):
-		var coin := coin_scene.instantiate()
+		var coin: Area2D = coin_scene.instantiate()
 		world.add_child(coin)
 		coin.global_position = room.global_position + Vector2(randi_range(40, 140), randi_range(40, 100))
 	if randf() < 0.2:
-		var key := key_scene.instantiate()
+		var key: Area2D = key_scene.instantiate()
 		world.add_child(key)
 		key.global_position = room.global_position + Vector2(randi_range(60, 120), randi_range(60, 110))
 	if randf() < 0.4:
-		var chest := chest_scene.instantiate()
+		var chest: Area2D = chest_scene.instantiate()
 		world.add_child(chest)
 		chest.global_position = room.global_position + Vector2(randi_range(60, 120), randi_range(50, 100))
 		chest.opened.connect(_on_chest_opened)
@@ -136,7 +136,7 @@ func _on_resume_pressed() -> void:
 func _on_quit_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")
 
-func _random_walk_rooms(count: int) -> Array:
+func _random_walk_rooms(count: int) -> Array[Vector2i]:
 	var coords: Array[Vector2i] = [Vector2i.ZERO]
 	while coords.size() < count:
 		var current: Vector2i = coords.pick_random()
