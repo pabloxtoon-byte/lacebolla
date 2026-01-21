@@ -142,6 +142,8 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		take_damage(area.get_damage())
 
 func _on_attack_area_body_entered(body: Node) -> void:
+	if body == self:
+		return
 	if body.has_method("take_damage"):
 		body.take_damage(_roll_damage())
 
