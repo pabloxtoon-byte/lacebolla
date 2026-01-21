@@ -77,7 +77,7 @@ func _spawn_player() -> void:
 	player.global_position = start_room.global_position + Vector2(room_size.x * 8, room_size.y * 8)
 	player.died.connect(_on_player_died)
 	player.health_changed.connect(ui.update_health)
-	camera.current = true
+	camera.make_current()
 
 func _populate_rooms() -> void:
 	for room in rooms.values():

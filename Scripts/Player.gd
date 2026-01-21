@@ -57,6 +57,7 @@ func setup_sprite() -> void:
 		accent = Color(0.8, 0.9, 0.6)
 	sprite.sprite_frames = ProceduralSprite.make_character_frames(body_color, accent)
 	sprite.play("walk")
+	sprite.autoplay = ""
 
 func _configure_collisions() -> void:
 	var body_shape: RectangleShape2D = $BodyCollision.shape as RectangleShape2D
