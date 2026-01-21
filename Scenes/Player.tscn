@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=5 format=3]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(12, 12)
