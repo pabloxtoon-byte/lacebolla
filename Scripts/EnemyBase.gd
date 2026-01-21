@@ -14,10 +14,10 @@ var target: Node2D
 
 func _ready() -> void:
 	hp = max_hp
-	var body_shape := get_node_or_null("BodyCollision")
+	var body_shape: CollisionShape2D = get_node_or_null("BodyCollision") as CollisionShape2D
 	if body_shape and body_shape.shape is RectangleShape2D:
 		body_shape.shape.size = Vector2(12, 12)
-	var hit_shape := $Hitbox.get_node_or_null("CollisionShape2D")
+	var hit_shape: CollisionShape2D = $Hitbox.get_node_or_null("CollisionShape2D") as CollisionShape2D
 	if hit_shape and hit_shape.shape is RectangleShape2D:
 		hit_shape.shape.size = Vector2(12, 12)
 

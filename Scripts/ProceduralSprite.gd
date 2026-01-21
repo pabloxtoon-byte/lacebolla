@@ -25,7 +25,7 @@ static func make_character_frames(body_color: Color, accent_color: Color) -> Spr
 	frames.set_animation_speed("walk", 8)
 	frames.set_animation_loop("walk", true)
 	for i in range(4):
-		var img := Image.create(16, 16, false, Image.FORMAT_RGBA8)
+		var img: Image = Image.create(16, 16, false, Image.FORMAT_RGBA8)
 		img.fill(Color(0, 0, 0, 0))
 		_fill_rect(img, Rect2i(4, 4, 8, 9), body_color)
 		_fill_rect(img, Rect2i(6, 2, 4, 3), accent_color)
@@ -36,7 +36,7 @@ static func make_character_frames(body_color: Color, accent_color: Color) -> Spr
 		else:
 			_fill_rect(img, Rect2i(9, 13, 3, 2), body_color)
 		_outline(img, Color(0.1, 0.1, 0.1))
-		var tex := ImageTexture.create_from_image(img)
+		var tex: Texture2D = ImageTexture.create_from_image(img)
 		frames.add_frame("walk", tex)
 	return frames
 
@@ -46,7 +46,7 @@ static func make_enemy_frames(base_color: Color, accent_color: Color, with_ears 
 	frames.set_animation_speed("walk", 6)
 	frames.set_animation_loop("walk", true)
 	for i in range(3):
-		var img := Image.create(16, 16, false, Image.FORMAT_RGBA8)
+		var img: Image = Image.create(16, 16, false, Image.FORMAT_RGBA8)
 		img.fill(Color(0, 0, 0, 0))
 		_fill_rect(img, Rect2i(4, 6, 8, 6), base_color)
 		_fill_rect(img, Rect2i(5, 4, 6, 3), accent_color)
@@ -57,19 +57,19 @@ static func make_enemy_frames(base_color: Color, accent_color: Color, with_ears 
 			_fill_rect(img, Rect2i(6, 12, 2, 2), base_color.darkened(0.2))
 			_fill_rect(img, Rect2i(8, 12, 2, 2), base_color.darkened(0.2))
 		_outline(img, Color(0.05, 0.05, 0.05))
-		var tex := ImageTexture.create_from_image(img)
+		var tex: Texture2D = ImageTexture.create_from_image(img)
 		frames.add_frame("walk", tex)
 	return frames
 
 static func make_projectile_texture(color: Color) -> Texture2D:
-	var img := Image.create(8, 8, false, Image.FORMAT_RGBA8)
+	var img: Image = Image.create(8, 8, false, Image.FORMAT_RGBA8)
 	img.fill(Color(0, 0, 0, 0))
 	_fill_rect(img, Rect2i(2, 2, 4, 4), color)
 	_outline(img, Color(0.1, 0.1, 0.1))
 	return ImageTexture.create_from_image(img)
 
 static func make_tile_texture(base_color: Color, accent_color: Color) -> Texture2D:
-	var img := Image.create(16, 16, false, Image.FORMAT_RGBA8)
+	var img: Image = Image.create(16, 16, false, Image.FORMAT_RGBA8)
 	img.fill(base_color)
 	_fill_rect(img, Rect2i(2, 2, 4, 4), accent_color)
 	_fill_rect(img, Rect2i(10, 8, 3, 3), accent_color.darkened(0.1))
@@ -77,7 +77,7 @@ static func make_tile_texture(base_color: Color, accent_color: Color) -> Texture
 	return ImageTexture.create_from_image(img)
 
 static func make_shadow_texture() -> Texture2D:
-	var img := Image.create(32, 32, false, Image.FORMAT_RGBA8)
+	var img: Image = Image.create(32, 32, false, Image.FORMAT_RGBA8)
 	img.fill(Color(0, 0, 0, 0))
 	for y in range(32):
 		for x in range(32):
@@ -89,7 +89,7 @@ static func make_shadow_texture() -> Texture2D:
 	return ImageTexture.create_from_image(img)
 
 static func make_light_texture() -> Texture2D:
-	var img := Image.create(64, 64, false, Image.FORMAT_RGBA8)
+	var img: Image = Image.create(64, 64, false, Image.FORMAT_RGBA8)
 	img.fill(Color(0, 0, 0, 0))
 	for y in range(64):
 		for x in range(64):

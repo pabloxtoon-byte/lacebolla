@@ -10,6 +10,6 @@ func _ready() -> void:
 
 func _on_hop_timer_timeout() -> void:
 	if target:
-		var dir := (target.global_position - global_position).normalized()
+		var dir: Vector2 = (target.global_position - global_position).normalized()
 		velocity = dir * move_speed * 1.4
 		move_and_slide()

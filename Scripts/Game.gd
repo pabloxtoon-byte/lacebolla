@@ -17,8 +17,8 @@ extends Node2D
 
 var rooms: Dictionary = {}
 var player: CharacterBody2D
-var room_size := Vector2i(12, 9)
-var room_spacing := Vector2i(220, 180)
+var room_size: Vector2i = Vector2i(12, 9)
+var room_spacing: Vector2i = Vector2i(220, 180)
 
 func _ready() -> void:
 	randomize()
@@ -86,14 +86,14 @@ func _populate_rooms() -> void:
 func _spawn_room_enemies(room: Node) -> void:
 	if room == rooms[Vector2i.ZERO]:
 		return
-	var count := randi_range(2, 4)
-	var picks: Array = []
+	var count: int = randi_range(2, 4)
+	var picks: Array[PackedScene] = []
 	for i in range(count):
 		picks.append(enemy_scenes.pick_random())
 	room.spawn_enemies(picks, player)
 
 func _on_enemy_killed() -> void:
-	var leveled := GameState.add_exp(1)
+	var leveled: bool = GameState.add_exp(1)
 	if leveled:
 		ui.show_message("Nuevo nivel")
 		reward_select.show_rewards(GameState.get_random_perks())

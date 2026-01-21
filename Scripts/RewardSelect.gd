@@ -2,7 +2,7 @@ extends Control
 
 signal perk_selected(perk)
 
-@onready var buttons := [
+@onready var buttons: Array[Button] = [
 	%PerkButton1,
 	%PerkButton2,
 	%PerkButton3
@@ -16,13 +16,13 @@ func _ready() -> void:
 func show_rewards(perks: Array) -> void:
 	current_perks = perks
 	for i in range(buttons.size()):
-		var perk := perks[i]
+		var perk: Dictionary = perks[i]
 		buttons[i].text = "%s\n%s" % [perk.name, perk.desc]
 	visible = true
 	get_tree().paused = true
 
 func _on_perk_pressed(index: int) -> void:
-	var perk := current_perks[index]
+	var perk: Dictionary = current_perks[index]
 	visible = false
 	get_tree().paused = false
 	emit_signal("perk_selected", perk)

@@ -31,12 +31,12 @@ func _ready() -> void:
 	emit_signal("health_changed", hp, max_hp)
 
 func _load_stats(reset_hp: bool = true) -> void:
-	var old_max := max_hp
+	var old_max: int = max_hp
 	max_hp = GameState.stats["max_hp"]
 	if reset_hp:
 		hp = max_hp
 	else:
-		var diff := max_hp - old_max
+		var diff: int = max_hp - old_max
 		hp = clamp(hp + diff, 1, max_hp)
 	move_speed = GameState.stats["move_speed"]
 	damage = GameState.stats["damage"]
@@ -44,8 +44,8 @@ func _load_stats(reset_hp: bool = true) -> void:
 	attack_timer.wait_time = attack_rate
 
 func setup_sprite() -> void:
-	var body_color := Color(0.3, 0.5, 0.8)
-	var accent := Color(0.9, 0.8, 0.6)
+	var body_color: Color = Color(0.3, 0.5, 0.8)
+	var accent: Color = Color(0.9, 0.8, 0.6)
 	if GameState.selected_class == GameState.CLASS_WARRIOR:
 		body_color = Color(0.7, 0.3, 0.2)
 		accent = Color(0.9, 0.8, 0.6)
@@ -59,15 +59,15 @@ func setup_sprite() -> void:
 	sprite.play("walk")
 
 func _configure_collisions() -> void:
-	var body_shape := $BodyCollision.shape as RectangleShape2D
+	var body_shape: RectangleShape2D = $BodyCollision.shape as RectangleShape2D
 	body_shape.size = Vector2(12, 12)
-	var attack_shape := $AttackArea/AttackCollision.shape as RectangleShape2D
+	var attack_shape: RectangleShape2D = $AttackArea/AttackCollision.shape as RectangleShape2D
 	attack_shape.size = Vector2(16, 16)
-	var hurt_shape := $Hurtbox/HurtboxCollision.shape as RectangleShape2D
+	var hurt_shape: RectangleShape2D = $Hurtbox/HurtboxCollision.shape as RectangleShape2D
 	hurt_shape.size = Vector2(12, 12)
 
 func _physics_process(delta: float) -> void:
-	var input := Vector2(
+	var input: Vector2 = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	)

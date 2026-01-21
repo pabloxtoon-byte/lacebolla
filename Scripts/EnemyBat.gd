@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 	if not target:
 		return
 	move_time += delta
-	var dir := (target.global_position - global_position).normalized()
-	var wobble := Vector2(cos(move_time * 5.0), sin(move_time * 6.0)) * 0.4
+	var dir: Vector2 = (target.global_position - global_position).normalized()
+	var wobble: Vector2 = Vector2(cos(move_time * 5.0), sin(move_time * 6.0)) * 0.4
 	velocity = (dir + wobble).normalized() * move_speed
 	move_and_slide()

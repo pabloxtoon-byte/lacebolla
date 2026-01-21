@@ -3,13 +3,13 @@ extends Node2D
 signal room_cleared
 signal enemy_killed
 
-@export var size := Vector2i(12, 9)
-@export var tile_size := 16
+@export var size: Vector2i = Vector2i(12, 9)
+@export var tile_size: int = 16
 
-var coord := Vector2i.ZERO
-var neighbors := {}
-var cleared := false
-var enemy_count := 0
+var coord: Vector2i = Vector2i.ZERO
+var neighbors: Dictionary = {}
+var cleared: bool = false
+var enemy_count: int = 0
 
 @onready var floor_root: Node2D = $Floor
 @onready var wall_root: Node2D = $Walls
@@ -26,10 +26,10 @@ func setup(room_coord: Vector2i, room_neighbors: Dictionary) -> void:
 
 func _generate_floor() -> void:
 	_clear_children(floor_root)
-	var floor_tex := ProceduralSprite.make_tile_texture(Color(0.2, 0.2, 0.25), Color(0.25, 0.25, 0.3))
+	var floor_tex: Texture2D = ProceduralSprite.make_tile_texture(Color(0.2, 0.2, 0.25), Color(0.25, 0.25, 0.3))
 	for y in range(size.y):
 		for x in range(size.x):
-			var tile := Sprite2D.new()
+			var tile: Sprite2D = Sprite2D.new()
 			tile.texture = floor_tex
 			tile.position = Vector2(x * tile_size, y * tile_size)
 			floor_root.add_child(tile)
@@ -37,9 +37,9 @@ func _generate_floor() -> void:
 func _generate_walls() -> void:
 	_clear_children(wall_root)
 	_clear_children(door_root)
-	var wall_tex := ProceduralSprite.make_tile_texture(Color(0.12, 0.12, 0.14), Color(0.2, 0.2, 0.25))
-	var room_width := size.x * tile_size
-	var room_height := size.y * tile_size
+	var wall_tex: Texture2D = ProceduralSprite.make_tile_texture(Color(0.12, 0.12, 0.14), Color(0.2, 0.2, 0.25))
+	var room_width: int = size.x * tile_size
+	var room_height: int = size.y * tile_size
 	for x in range(size.x):
 		_add_wall_tile(Vector2(x * tile_size, -tile_size), wall_tex)
 		_add_wall_tile(Vector2(x * tile_size, room_height), wall_tex)
@@ -52,7 +52,7 @@ func _generate_walls() -> void:
 	_create_door("right", Vector2(room_width + tile_size * 0.5, room_height * 0.5))
 
 func _add_wall_tile(pos: Vector2, tex: Texture2D) -> void:
-	var tile := Sprite2D.new()
+	var tile: Sprite2D = Sprite2D.new()
 	tile.texture = tex
 	tile.position = pos
 	wall_root.add_child(tile)
@@ -60,12 +60,12 @@ func _add_wall_tile(pos: Vector2, tex: Texture2D) -> void:
 func _create_door(dir: String, pos: Vector2) -> void:
 	if not neighbors.has(dir):
 		return
-	var door := StaticBody2D.new()
-	var shape := CollisionShape2D.new()
+	var door: StaticBody2D = StaticBody2D.new()
+	var shape: CollisionShape2D = CollisionShape2D.new()
 	shape.shape = RectangleShape2D.new()
 	shape.shape.size = Vector2(12, 12)
 	shape.position = Vector2.ZERO
-	var sprite := Sprite2D.new()
+	var sprite: Sprite2D = Sprite2D.new()
 	sprite.texture = ProceduralSprite.make_tile_texture(Color(0.35, 0.2, 0.1), Color(0.5, 0.3, 0.1))
 	sprite.position = Vector2.ZERO
 	door.position = pos
@@ -76,14 +76,14 @@ func _create_door(dir: String, pos: Vector2) -> void:
 
 func _spawn_obstacles() -> void:
 	_clear_children(obstacles_root)
-	var rock_tex := ProceduralSprite.make_tile_texture(Color(0.25, 0.25, 0.28), Color(0.35, 0.35, 0.4))
+	var rock_tex: Texture2D = ProceduralSprite.make_tile_texture(Color(0.25, 0.25, 0.28), Color(0.35, 0.35, 0.4))
 	for i in range(3):
-		var rock := StaticBody2D.new()
+		var rock: StaticBody2D = StaticBody2D.new()
 		rock.position = Vector2(randi_range(2, size.x - 3) * tile_size, randi_range(2, size.y - 3) * tile_size)
-		var sprite := Sprite2D.new()
+		var sprite: Sprite2D = Sprite2D.new()
 		sprite.texture = rock_tex
 		rock.add_child(sprite)
-		var shape := CollisionShape2D.new()
+		var shape: CollisionShape2D = CollisionShape2D.new()
 		shape.shape = RectangleShape2D.new()
 		shape.shape.size = Vector2(12, 12)
 		rock.add_child(shape)
@@ -111,9 +111,9 @@ func _open_doors() -> void:
 		door.queue_free()
 
 func _add_torches() -> void:
-	var light_tex := ProceduralSprite.make_light_texture()
+	var light_tex: Texture2D = ProceduralSprite.make_light_texture()
 	for pos in [Vector2(24, 24), Vector2(size.x * tile_size - 24, 24)]:
-		var light := PointLight2D.new()
+		var light: PointLight2D = PointLight2D.new()
 		light.texture = light_tex
 		light.energy = 0.8
 		light.position = pos
