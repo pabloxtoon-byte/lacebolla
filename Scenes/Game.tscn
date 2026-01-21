@@ -37,24 +37,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 visible = false
 
-[node name="Center" type="CenterContainer" parent="PauseMenu"]
+[node name="Center" type="CenterContainer" parent="HUD/PauseMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 visible = false
 
-[node name="VBox" type="VBoxContainer" parent="PauseMenu/Center"]
+[node name="VBox" type="VBoxContainer" parent="HUD/PauseMenu/Center"]
 custom_minimum_size = Vector2(260, 160)
 visible = false
 
-[node name="Title" type="Label" parent="PauseMenu/Center/VBox"]
+[node name="Title" type="Label" parent="HUD/PauseMenu/Center/VBox"]
 text = "Pausa"
 horizontal_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="PauseMenu/Center/VBox"]
+[node name="ResumeButton" type="Button" parent="HUD/PauseMenu/Center/VBox"]
 text = "Continuar"
 
-[node name="QuitButton" type="Button" parent="PauseMenu/Center/VBox"]
+[node name="QuitButton" type="Button" parent="HUD/PauseMenu/Center/VBox"]
 text = "Salir al menú"
 
-[connection signal="pressed" from="PauseMenu/Center/VBox/ResumeButton" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="PauseMenu/Center/VBox/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="HUD/PauseMenu/Center/VBox/ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="HUD/PauseMenu/Center/VBox/QuitButton" to="." method="_on_quit_pressed"]
