@@ -40,9 +40,11 @@ visible = false
 [node name="Center" type="CenterContainer" parent="PauseMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+visible = false
 
 [node name="VBox" type="VBoxContainer" parent="PauseMenu/Center"]
 custom_minimum_size = Vector2(260, 160)
+visible = false
 
 [node name="Title" type="Label" parent="PauseMenu/Center/VBox"]
 text = "Pausa"
