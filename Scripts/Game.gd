@@ -11,9 +11,9 @@ extends Node2D
 
 @onready var world: Node2D = $World
 @onready var camera: Camera2D = $Camera2D
-@onready var ui: Control = $UI
-@onready var reward_select: Control = $RewardSelect
-@onready var pause_menu: Control = $PauseMenu
+@onready var ui: Control = $HUD/UI
+@onready var reward_select: Control = $HUD/RewardSelect
+@onready var pause_menu: Control = $HUD/PauseMenu
 
 var rooms: Dictionary = {}
 var player: CharacterBody2D
