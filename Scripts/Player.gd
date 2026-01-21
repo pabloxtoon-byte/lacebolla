@@ -66,7 +66,7 @@ func _configure_collisions() -> void:
 	var hurt_shape: RectangleShape2D = $Hurtbox/HurtboxCollision.shape as RectangleShape2D
 	hurt_shape.size = Vector2(12, 12)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var input: Vector2 = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")

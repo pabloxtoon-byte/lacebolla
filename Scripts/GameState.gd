@@ -20,7 +20,7 @@ const PERK_POOL := [
 
 var selected_class: String = CLASS_WARRIOR
 var level: int = 1
-var exp: int = 0
+var xp: int = 0
 var exp_to_level: int = 5
 var coins: int = 0
 var keys: int = 0
@@ -32,7 +32,7 @@ func _ready() -> void:
 
 func reset_run() -> void:
 	level = 1
-	exp = 0
+	xp = 0
 	exp_to_level = 5
 	coins = 0
 	keys = 0
@@ -44,9 +44,9 @@ func set_class(class_id: String) -> void:
 	reset_run()
 
 func add_exp(amount: int) -> bool:
-	exp += amount
-	if exp >= exp_to_level:
-		exp -= exp_to_level
+	xp += amount
+	if xp >= exp_to_level:
+		xp -= exp_to_level
 		level += 1
 		exp_to_level = int(exp_to_level * 1.35) + 2
 		return true
