@@ -68,10 +68,7 @@ func _configure_collisions() -> void:
 	hurt_shape.size = Vector2(12, 12)
 
 func _physics_process(_delta: float) -> void:
-	var input: Vector2 = Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	)
+	var input: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input.length() > 0.1:
 		facing = input.normalized()
 		velocity = facing * move_speed
