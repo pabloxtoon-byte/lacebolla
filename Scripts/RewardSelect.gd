@@ -2,7 +2,7 @@ extends Control
 
 signal perk_selected(perk)
 
-@onready var buttons: Array[Button] = [
+@onready var buttons: Array[Node] = [
 	%PerkButton1,
 	%PerkButton2,
 	%PerkButton3
@@ -17,7 +17,8 @@ func show_rewards(perks: Array) -> void:
 	current_perks = perks
 	for i in range(buttons.size()):
 		var perk: Dictionary = perks[i]
-		buttons[i].text = "%s\n%s" % [perk.name, perk.desc]
+		var button := buttons[i] as Button
+		button.text = "%s\n%s" % [perk.name, perk.desc]
 	visible = true
 	get_tree().paused = true
 
