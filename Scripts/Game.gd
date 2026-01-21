@@ -14,6 +14,8 @@ extends Node2D
 @onready var ui: Control = $HUD/UI
 @onready var reward_select: Control = $HUD/RewardSelect
 @onready var pause_menu: Control = $HUD/PauseMenu
+@onready var pause_center: Control = $HUD/PauseMenu/Center
+@onready var pause_box: Control = $HUD/PauseMenu/Center/VBox
 
 var rooms: Dictionary = {}
 var player: CharacterBody2D
@@ -30,6 +32,8 @@ func _ready() -> void:
 	reward_select.perk_selected.connect(_on_perk_selected)
 	pause_menu.visible = false
 	pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
+	pause_center.visible = false
+	pause_box.visible = false
 
 func _process(_delta: float) -> void:
 	if player:
@@ -42,7 +46,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _toggle_pause() -> void:
 	get_tree().paused = not get_tree().paused
-	pause_menu.visible = get_tree().paused
+	var show_pause := get_tree().paused
+	pause_menu.visible = show_pause
+	pause_center.visible = show_pause
+	pause_box.visible = show_pause
 
 func _generate_dungeon() -> void:
 	rooms.clear()
