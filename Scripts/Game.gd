@@ -64,7 +64,7 @@ func _toggle_inventory() -> void:
 func _generate_dungeon() -> void:
 	rooms.clear()
 	_clear_children(world)
-	var coords: Array[Vector2i] = _random_walk_rooms(8)
+	var coords: Array[Vector2i] = _random_walk_rooms(16)
 	var coord_set: Dictionary = {}
 	for c in coords:
 		coord_set[c] = true
@@ -135,7 +135,12 @@ func _spawn_loot(room: Node) -> void:
 		chest.opened.connect(_on_chest_opened)
 
 func _on_chest_opened() -> void:
-	ui.show_message("Cofre abierto")
+	var item_name := GameState.get_random_item()
+	if GameState.add_item(item_name):
+		ui.show_message("Cofre abierto: %s" % item_name)
+	else:
+		ui.show_message("Mochila llena")
+		return
 	reward_select.show_rewards(GameState.get_random_perks())
 
 func _on_perk_selected(perk: Dictionary) -> void:

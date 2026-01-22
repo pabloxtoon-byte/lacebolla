@@ -18,6 +18,19 @@ const PERK_POOL := [
 	{"id": "crit", "name": "+ Crítico", "desc": "+5% prob. crítico", "value": 0.05},
 ]
 
+const ITEM_POOL := [
+	"Poción pequeña",
+	"Bomba de humo",
+	"Flecha afilada",
+	"Anillo oxidado",
+	"Amuleto tenue",
+	"Libro antiguo",
+	"Daga curva",
+	"Runa chispeante",
+	"Escama dura",
+	"Talismán oscuro",
+]
+
 var selected_class: String = CLASS_WARRIOR
 var level: int = 1
 var xp: int = 0
@@ -26,6 +39,7 @@ var coins: int = 0
 var keys: int = 0
 var stats := {}
 var crit_chance := 0.05
+var inventory: Array[String] = []
 
 func _ready() -> void:
 	reset_run()
@@ -38,6 +52,9 @@ func reset_run() -> void:
 	keys = 0
 	crit_chance = 0.05
 	stats = BASE_STATS[selected_class].duplicate(true)
+	inventory = []
+	for i in range(10):
+		inventory.append("")
 
 func set_class(class_id: String) -> void:
 	selected_class = class_id
@@ -69,3 +86,13 @@ func apply_perk(perk: Dictionary) -> void:
 			stats["attack_rate"] = max(0.1, stats["attack_rate"] + stats["attack_rate"] * perk.value)
 		"crit":
 			crit_chance += perk.value
+
+func get_random_item() -> String:
+	return ITEM_POOL.pick_random()
+
+func add_item(item_name: String) -> bool:
+	for i in range(inventory.size()):
+		if inventory[i] == "":
+			inventory[i] = item_name
+			return true
+	return false

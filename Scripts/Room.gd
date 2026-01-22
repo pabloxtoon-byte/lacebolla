@@ -93,10 +93,19 @@ func spawn_enemies(enemy_scenes: Array, player: Node2D) -> void:
 	for scene in enemy_scenes:
 		var enemy: Node2D = scene.instantiate()
 		add_child(enemy)
-		enemy.global_position = global_position + Vector2(randi_range(2, size.x - 2) * tile_size, randi_range(2, size.y - 2) * tile_size)
+		enemy.global_position = _find_spawn_position(player)
 		enemy.set_target(player)
 		enemy.died.connect(_on_enemy_died)
 		enemy_count += 1
+
+func _find_spawn_position(player: Node2D) -> Vector2:
+	var attempts := 10
+	var min_dist := float(tile_size * 4)
+	for i in range(attempts):
+		var pos := global_position + Vector2(randi_range(2, size.x - 2) * tile_size, randi_range(2, size.y - 2) * tile_size)
+		if not player or pos.distance_to(player.global_position) >= min_dist:
+			return pos
+	return global_position + Vector2(randi_range(2, size.x - 2) * tile_size, randi_range(2, size.y - 2) * tile_size)
 
 func _on_enemy_died() -> void:
 	enemy_count -= 1
