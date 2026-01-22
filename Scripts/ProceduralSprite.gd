@@ -27,14 +27,28 @@ static func make_character_frames(body_color: Color, accent_color: Color) -> Spr
 	for i in range(4):
 		var img: Image = Image.create(16, 16, false, Image.FORMAT_RGBA8)
 		img.fill(Color(0, 0, 0, 0))
-		_fill_rect(img, Rect2i(4, 4, 8, 9), body_color)
-		_fill_rect(img, Rect2i(6, 2, 4, 3), accent_color)
-		_fill_rect(img, Rect2i(4, 13, 3, 2), body_color.darkened(0.2))
-		_fill_rect(img, Rect2i(9, 13, 3, 2), body_color.darkened(0.2))
+		# Head + face
+		_fill_rect(img, Rect2i(5, 1, 6, 4), accent_color)
+		_fill_rect(img, Rect2i(6, 2, 1, 1), Color(0.1, 0.1, 0.1))
+		_fill_rect(img, Rect2i(9, 2, 1, 1), Color(0.1, 0.1, 0.1))
+		# Torso + belt
+		_fill_rect(img, Rect2i(4, 5, 8, 6), body_color)
+		_fill_rect(img, Rect2i(4, 8, 8, 1), body_color.darkened(0.2))
+		# Arms
+		_fill_rect(img, Rect2i(3, 6, 2, 4), body_color.darkened(0.1))
+		_fill_rect(img, Rect2i(11, 6, 2, 4), body_color.darkened(0.1))
+		# Weapon/robe accent on right arm
+		_fill_rect(img, Rect2i(11, 7, 2, 1), accent_color.darkened(0.2))
+		# Legs (animate)
 		if i % 2 == 0:
-			_fill_rect(img, Rect2i(4, 13, 3, 2), body_color)
+			_fill_rect(img, Rect2i(5, 11, 2, 3), body_color.darkened(0.15))
+			_fill_rect(img, Rect2i(9, 12, 2, 3), body_color.darkened(0.15))
 		else:
-			_fill_rect(img, Rect2i(9, 13, 3, 2), body_color)
+			_fill_rect(img, Rect2i(5, 12, 2, 3), body_color.darkened(0.15))
+			_fill_rect(img, Rect2i(9, 11, 2, 3), body_color.darkened(0.15))
+		# Feet
+		_fill_rect(img, Rect2i(4, 14, 3, 1), body_color.darkened(0.3))
+		_fill_rect(img, Rect2i(9, 14, 3, 1), body_color.darkened(0.3))
 		_outline(img, Color(0.1, 0.1, 0.1))
 		var tex: Texture2D = ImageTexture.create_from_image(img)
 		frames.add_frame("walk", tex)
