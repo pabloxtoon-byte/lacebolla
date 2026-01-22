@@ -13,6 +13,7 @@ extends Node2D
 @onready var camera: Camera2D = $Camera2D
 @onready var ui: Control = $HUD/UI
 @onready var reward_select: Control = $HUD/RewardSelect
+@onready var inventory_menu: Control = $HUD/InventoryMenu
 @onready var pause_menu: Control = $HUD/PauseMenu
 @onready var pause_center: Control = $HUD/PauseMenu/Center
 @onready var pause_box: Control = $HUD/PauseMenu/Center/VBox
@@ -34,6 +35,7 @@ func _ready() -> void:
 	pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
 	pause_center.visible = false
 	pause_box.visible = false
+	inventory_menu.visible = false
 
 func _process(_delta: float) -> void:
 	if player:
@@ -43,6 +45,8 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		_toggle_pause()
+	if event.is_action_pressed("inventory"):
+		_toggle_inventory()
 
 func _toggle_pause() -> void:
 	get_tree().paused = not get_tree().paused
@@ -50,6 +54,12 @@ func _toggle_pause() -> void:
 	pause_menu.visible = show_pause
 	pause_center.visible = show_pause
 	pause_box.visible = show_pause
+
+func _toggle_inventory() -> void:
+	var show_menu := not inventory_menu.visible
+	inventory_menu.visible = show_menu
+	if show_menu:
+		inventory_menu.refresh()
 
 func _generate_dungeon() -> void:
 	rooms.clear()

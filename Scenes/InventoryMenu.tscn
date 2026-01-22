@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/InventoryMenu.gd" id="1"]
+
+[node name="InventoryMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+script = ExtResource("1")
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.25
+anchor_top = 0.15
+anchor_right = 0.75
+anchor_bottom = 0.85
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_minimum_size = Vector2(420, 320)
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+text = "Menú de personaje"
+horizontal_alignment = 1
+
+[node name="StatsLabel" type="Label" parent="Panel/VBox"]
+unique_name_in_owner = true
+text = ""
+
+[node name="InventoryTitle" type="Label" parent="Panel/VBox"]
+text = "Mochila (10)"
+
+[node name="Grid" type="GridContainer" parent="Panel/VBox"]
+columns = 5
+
+[node name="Slot1" type="Panel" parent="Panel/VBox/Grid"]
+custom_minimum_size = Vector2(48, 48)
+
+[node name="Slot2" type="Panel" parent="Panel/VBox/Grid"]
+custom_minimum_size = Vector2(48, 48)
+
+[node name="Slot3" type="Panel" parent="Panel/VBox/Grid"]
+custom_minimum_size = Vector2(48, 48)
+
+[node name="Slot4" type="Panel" parent="Panel/VBox/Grid"]
+custom_minimum_size = Vector2(48, 48)
+
+[node name="Slot5" type="Panel" parent="Panel/VBox/Grid"]
+custom_minimum_size = Vector2(48, 48)
+
+[node name="Slot6" type="Panel" parent="Panel/VBox/Grid"]
+custom_minimum_size = Vector2(48, 48)
+
+[node name="Slot7" type="Panel" parent="Panel/VBox/Grid"]
+custom_minimum_size = Vector2(48, 48)
+
+[node name="Slot8" type="Panel" parent="Panel/VBox/Grid"]
+custom_minimum_size = Vector2(48, 48)
+
+[node name="Slot9" type="Panel" parent="Panel/VBox/Grid"]
+custom_minimum_size = Vector2(48, 48)
+
+[node name="Slot10" type="Panel" parent="Panel/VBox/Grid"]
+custom_minimum_size = Vector2(48, 48)

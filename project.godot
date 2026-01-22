@@ -20,3 +20,4 @@ move_right={"deadzone":0.5,"events":[{"keycode":68},{"keycode":16777235}]}
 attack={"deadzone":0.5,"events":[{"keycode":32},{"button_index":1}]}
 dash={"deadzone":0.5,"events":[{"keycode":16777237}]}
 pause={"deadzone":0.5,"events":[{"keycode":16777217}]}
+inventory={"deadzone":0.5,"events":[{"keycode":16777239}]}
